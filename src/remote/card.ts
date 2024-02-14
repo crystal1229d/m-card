@@ -1,13 +1,35 @@
-import { collection, getDocs } from 'firebase/firestore'
+import {
+  collection,
+  QuerySnapshot,
+  query,
+  limit,
+  startAfter,
+  getDocs,
+} from 'firebase/firestore'
 import { store } from './firebase'
 import { COLLECTIONS } from '@/constants'
 import { Card } from '@/models/card'
 
-export async function getCards() {
-  const cardSnapshot = await getDocs(collection(store, COLLECTIONS.CARD))
+// cursor 로부터 10개씩 보여준다
+export async function getCards(pageParam?: QuerySnapshot<Card>) {
+  const cardQuery =
+    pageParam == null
+      ? query(collection(store, COLLECTIONS.CARD), limit(10))
+      : query(
+          collection(store, COLLECTIONS.CARD),
+          startAfter(pageParam),
+          limit(10),
+        )
 
-  return cardSnapshot.docs.map((doc) => ({
+  const cardSnapshot = await getDocs(cardQuery)
+
+  // 불러온 문서 중 가장 마지막 문서를 cursor 로 삼는다
+  const lastVisible = cardSnapshot.docs[cardSnapshot.docs.length - 1]
+
+  const items = cardSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Card),
   }))
+
+  return { items, lastVisible }
 }
