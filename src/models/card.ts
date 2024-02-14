@@ -7,7 +7,7 @@ export interface Card {
     title: string
     terms: string
   }
-  paback?: string
+  payback?: string
 }
 
 export interface AdBanner {
