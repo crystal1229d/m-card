@@ -1,9 +1,9 @@
 export interface Card {
   name: string
-  coprName: string
+  corpName: string
   tags: string[]
   benefit: string[]
-  promition?: {
+  promotion?: {
     title: string
     terms: string
   }

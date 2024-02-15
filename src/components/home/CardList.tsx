@@ -5,8 +5,11 @@ import { flatten } from 'lodash'
 import ListRow from '../shared/ListRow'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Badge from '@shared/Badge'
+import { useNavigate } from 'react-router-dom'
 
 function CardList() {
+  const navigate = useNavigate()
+
   const {
     data,
     hasNextPage = false,
@@ -60,6 +63,9 @@ function CardList() {
                   card.payback != null ? <Badge label={card.payback} /> : null
                 }
                 withArrow={true}
+                onClick={() => {
+                  navigate(`/card/${card.id}`)
+                }}
               />
             )
           })}
