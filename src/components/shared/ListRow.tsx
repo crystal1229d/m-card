@@ -17,7 +17,7 @@ function ListRow({
   right,
   withArrow,
   onClick,
-  as,
+  as = 'li',
 }: ListRowProps) {
   return (
     <Flex as={as} css={listRowContainerStyles} onClick={onClick} align="center">

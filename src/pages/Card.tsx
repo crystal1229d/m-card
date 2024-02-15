@@ -1,12 +1,15 @@
+import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { css } from '@emotion/react'
+import { motion } from 'framer-motion'
+
+import { getCard } from '@/remote/card'
+
 import FixedBottomButton from '@shared/FixedBottomButton'
 import Flex from '@shared/Flex'
 import ListRow from '@shared/ListRow'
 import Top from '@shared/Top'
-import { getCard } from '@/remote/card'
-import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
 import Text from '@shared/Text'
-import { css } from '@emotion/react'
 
 function CardPage() {
   const { id = '' } = useParams()
@@ -29,13 +32,28 @@ function CardPage() {
       <ul>
         {benefit.map((text, index) => {
           return (
-            <ListRow
-              key={text}
-              left={<IconCheck />}
-              contents={
-                <ListRow.Texts title={`혜택 ${index + 1}`} subTitle={text} />
-              }
-            />
+            <motion.li
+              initial={{ opacity: 0, translateX: -90 }}
+              animate={{ opacity: 1, translateX: 0 }}
+              transition={{
+                duration: 0.7,
+                ease: 'easeInOut',
+                delay: index * 0.1,
+              }}
+              // whileInView={{
+              //   opacity: 1,
+              //   translateX: 0,
+              // }}
+            >
+              <ListRow
+                as="div"
+                key={text}
+                left={<IconCheck />}
+                contents={
+                  <ListRow.Texts title={`혜택 ${index + 1}`} subTitle={text} />
+                }
+              />
+            </motion.li>
           )
         })}
       </ul>
