@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FirebaseError } from 'firebase/app'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
-import { useAlertContext } from '@/contexts/AlertContexts'
+import { useAlertContext } from '@/contexts/AlertContext'
 import { FormValues } from '@/models/signin'
 import { auth } from '@/remote/firebase'
 

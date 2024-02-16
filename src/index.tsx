@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import reportWebVitals from './reportWebVitals'
 import { Global } from '@emotion/react'
 import globalStyles from './styles/globalStyles'
-import { AlertContextProvider } from '@/contexts/AlertContexts'
+import { AlertContextProvider } from '@/contexts/AlertContext'
 import { RecoilRoot } from 'recoil'
 import AuthGuard from './components/auth/AuthGuard'
 
