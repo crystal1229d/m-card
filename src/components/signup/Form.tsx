@@ -1,13 +1,12 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { css } from '@emotion/react'
 import validator from 'validator'
+import { FormValues } from '@models/signup'
 
 import Flex from '@shared/Flex'
 import TextField from '@shared/TextField'
 import FixedBottomButton from '@shared/FixedBottomButton'
 import Spacing from '@shared/Spacing'
-
-import { FormValues } from '@models/signup'
 
 function Form({ onSubmit }: { onSubmit: (formValues: FormValues) => void }) {
   const [formValues, setFormValues] = useState<FormValues>({
