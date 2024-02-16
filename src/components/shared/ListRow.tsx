@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
-import Flex from './Flex'
-import Text from './Text'
+import Flex from '@shared/Flex'
+import Text from '@shared/Text'
 
 interface ListRowProps {
   left?: React.ReactNode

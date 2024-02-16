@@ -1,14 +1,13 @@
-import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
 import { css } from '@emotion/react'
 import { motion } from 'framer-motion'
 
-import { getCard } from '@/remote/card'
-
+import Top from '@shared/Top'
+import ListRow from '@shared/ListRow'
+import { getCard } from '@remote/card'
 import FixedBottomButton from '@shared/FixedBottomButton'
 import Flex from '@shared/Flex'
-import ListRow from '@shared/ListRow'
-import Top from '@shared/Top'
 import Text from '@shared/Text'
 
 function CardPage() {
@@ -18,8 +17,9 @@ function CardPage() {
     enabled: id !== '',
   })
 
-  console.log('data', data)
-  if (data == null) return null
+  if (data == null) {
+    return null
+  }
 
   const { name, corpName, promotion, tags, benefit } = data
 
@@ -33,17 +33,20 @@ function CardPage() {
         {benefit.map((text, index) => {
           return (
             <motion.li
-              initial={{ opacity: 0, translateX: -90 }}
-              animate={{ opacity: 1, translateX: 0 }}
+              initial={{
+                opacity: 0,
+                translateX: -90,
+              }}
               transition={{
                 duration: 0.7,
                 ease: 'easeInOut',
                 delay: index * 0.1,
               }}
-              // whileInView={{
-              //   opacity: 1,
-              //   translateX: 0,
-              // }}
+              animate={{
+                opacity: 1,
+                translateX: 0,
+              }}
+              key={text}
             >
               <ListRow
                 as="div"
@@ -58,35 +61,15 @@ function CardPage() {
         })}
       </ul>
 
-      {promotion != null ? (
+      {promotion != null && promotion?.terms != null ? (
         <Flex direction="column" css={termsContainerStyles}>
           <Text bold={true}>유의사항</Text>
           <Text typography="t7">{removeHtmlTags(promotion.terms)}</Text>
         </Flex>
       ) : null}
-
       <FixedBottomButton label="신청하기" onClick={() => {}} />
     </div>
   )
-}
-
-function removeHtmlTags(text: string) {
-  let output = ''
-
-  for (let i = 0; i < text.length; i += 1) {
-    if (text[i] === '<') {
-      for (let j = i + 1; j < text.length; j += 1) {
-        if (text[j] === '>') {
-          i = j
-          break
-        }
-      }
-    } else {
-      output += text[i]
-    }
-  }
-
-  return output
 }
 
 function IconCheck() {
@@ -115,6 +98,25 @@ function IconCheck() {
       />
     </svg>
   )
+}
+
+function removeHtmlTags(text: string) {
+  let output = ''
+
+  for (let i = 0; i < text.length; i += 1) {
+    if (text[i] === '<') {
+      for (let j = i + 1; j < text.length; j += 1) {
+        if (text[j] === '>') {
+          i = j
+          break
+        }
+      }
+    } else {
+      output += text[i]
+    }
+  }
+
+  return output
 }
 
 const termsContainerStyles = css`
