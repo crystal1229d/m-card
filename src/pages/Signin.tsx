@@ -42,7 +42,7 @@ function SigninPage() {
         })
       }
     },
-    [open],
+    [navigate, open],
   )
 
   return (
