@@ -25,7 +25,7 @@ function ApplyPage() {
           status: APPLY_STATUS.COMPLETE,
         },
       })
-      navigate('/apply/done?success=true')
+      navigate('/apply/done?success=true', { replace: true })
     },
     onError: async () => {
       await updateApplyCard({
@@ -35,7 +35,7 @@ function ApplyPage() {
           status: APPLY_STATUS.REJECT,
         },
       })
-      navigate('/apply/done?success=false')
+      navigate('/apply/done?success=false', { replace: true })
     },
     enabled: readyToPoll,
   })
