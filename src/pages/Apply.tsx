@@ -9,6 +9,7 @@ import { APPLY_STATUS } from '@/models/apply'
 import { updateApplyCard } from '@/remote/apply'
 import useAppliedCard from '@/components/apply/hooks/useAppliedCard'
 import { useAlertContext } from '@/contexts/AlertContext'
+import FullPageLoader from '@shared/FullPageLoader'
 
 function ApplyPage() {
   const navigate = useNavigate()
@@ -83,9 +84,8 @@ function ApplyPage() {
     return null
   }
 
-  // TODO: 개선
   if (readyToPoll || 카드를신청중인가) {
-    return <div>Loading...</div>
+    return <FullPageLoader message="카드를 신청 중입니다" />
   }
 
   return <Apply onSubmit={mutate} />
