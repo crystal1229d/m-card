@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from './components/shared/ScrollToTop'
 import CardPage from '@pages/Card'
@@ -24,7 +25,9 @@ function App() {
           path="/apply/:id"
           element={
             <PrivateRoute>
-              <ApplyPage />
+              <Suspense fallback={<>Loading...</>}>
+                <ApplyPage />
+              </Suspense>
             </PrivateRoute>
           }
         />
